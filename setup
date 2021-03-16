@@ -1,0 +1,16 @@
+sudo yum install awslogs
+sudo vi /etc/awslogs/awslogs.conf
+
+Add these lines at the bottom
+
+[/var/www/html/storage/logs/laravel.log]
+datetime_format = %b %d %H:%M:%S
+file = /var/www/html/storage/logs/laravel.log
+buffer_duration = 5000
+log_stream_name = {instance_id}
+initial_position = start_of_file
+log_group_name = Backend-laravel-logs
+
+
+sudo systemctl restart awslogsd
+sudo systemctl enable awslogsd
